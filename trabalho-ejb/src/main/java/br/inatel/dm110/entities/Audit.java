@@ -33,7 +33,7 @@ public class Audit
 	@Column(length = 4, nullable = false, unique = true)
 	private Integer identifier;
 
-	@Column(length = 11, nullable = false, unique = true)
+	@Column(length = 11, nullable = false)
 	private String registerCode;
 
 	@Column(length = 6, nullable = false)

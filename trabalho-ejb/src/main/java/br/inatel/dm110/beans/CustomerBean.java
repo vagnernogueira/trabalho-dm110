@@ -26,7 +26,6 @@ public class CustomerBean implements CustomerBeanLocal
 	{
 		Customer customer = CustomerConverter.toEntity(customerDTO);
 		em.persist(customer);
-		auditSenderBean.sendTextMessage(customer.toString());
 		auditSenderBean.sendTextMessage(customer.getCpf() + "-" + Audit.OPERATION_CREATE);
 	}
 

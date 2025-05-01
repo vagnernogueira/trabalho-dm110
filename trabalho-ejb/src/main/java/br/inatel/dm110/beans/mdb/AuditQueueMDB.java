@@ -3,8 +3,8 @@ package br.inatel.dm110.beans.mdb;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import br.inatel.dm110.beans.AuditBean;
 import br.inatel.dm110.dto.AuditDTO;
+import br.inatel.dm110.interfaces.AuditBeanLocal;
 import jakarta.ejb.ActivationConfigProperty;
 import jakarta.ejb.EJB;
 import jakarta.ejb.MessageDriven;
@@ -26,7 +26,7 @@ import jakarta.jms.TextMessage;
 public class AuditQueueMDB implements MessageListener {
 
 	@EJB
-	private AuditBean auditBean;
+	private AuditBeanLocal auditBean;
 
 	@Override
 	public void onMessage(Message message) {
