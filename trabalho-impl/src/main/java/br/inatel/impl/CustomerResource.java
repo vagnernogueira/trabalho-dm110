@@ -24,21 +24,22 @@ public class CustomerResource
 	private CustomerBeanLocal customerBean;
 
 	@POST
+	@Path("/create")
 	public Response createCustomer(CustomerDTO dto)
 	{
 		try
 		{
 			customerBean.create(dto);
-			return Response.status(Response.Status.CREATED).build(); // 201 Created
+			return Response.status(Response.Status.CREATED).entity("Customer successfully created.").build();
 		}
 		catch (Exception e)
 		{
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao criar cliente.").build(); // 500 Internal Server Error
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error while creating customer.").build();
 		}
 	}
 
 	@GET
-	@Path("/{cpf}")
+	@Path("/get/{cpf}")
 	public Response getCustomer(@PathParam("cpf")
 	String cpf)
 	{
@@ -47,32 +48,33 @@ public class CustomerResource
 			CustomerDTO dto = customerBean.findByCpf(cpf);
 			if (dto != null)
 			{
-				return Response.ok(dto).build(); // 200 OK
+				return Response.ok(dto).build();
 			}
-			return Response.status(Response.Status.NOT_FOUND).entity("Cliente não encontrado.").build(); // 404 Not Found
+			return Response.status(Response.Status.NOT_FOUND).entity("Customer not found.").build();
 		}
 		catch (Exception e)
 		{
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao buscar cliente.").build(); // 500 Internal Server Error
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error while retrieving customer.").build();
 		}
 	}
 
 	@GET
+	@Path("/list")
 	public Response listCustomers()
 	{
 		try
 		{
 			List<CustomerDTO> customers = customerBean.findAll();
-			return Response.ok(customers).build(); // 200 OK
+			return Response.ok(customers).build();
 		}
 		catch (Exception e)
 		{
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao listar clientes.").build(); // 500 Internal Server Error
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error while listing customers.").build();
 		}
 	}
 
 	@PUT
-	@Path("/{cpf}")
+	@Path("/update/{cpf}")
 	public Response updateCustomer(@PathParam("cpf")
 	String cpf, CustomerDTO dto)
 	{
@@ -81,13 +83,13 @@ public class CustomerResource
 			boolean updated = customerBean.updateCustomer(cpf, dto);
 			if (updated)
 			{
-				return Response.ok().build(); // 200 OK
+				return Response.ok("Customer successfully updated.").build();
 			}
-			return Response.status(Response.Status.NOT_FOUND).entity("Cliente não encontrado para atualização.").build(); // 404 Not Found
+			return Response.status(Response.Status.NOT_FOUND).entity("Customer not found for update.").build();
 		}
 		catch (Exception e)
 		{
-			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Erro ao atualizar cliente.").build(); // 500 Internal Server Error
+			return Response.status(Response.Status.INTERNAL_SERVER_ERROR).entity("Error while updating customer.").build();
 		}
 	}
 }

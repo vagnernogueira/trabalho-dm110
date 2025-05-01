@@ -3,12 +3,15 @@
 	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
     http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+
 	<persistence-unit name="trabalho_dm110_pu">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-		<non-jta-data-source>java:/TRABALHO_DM110_DS</non-jta-data-source>
+		<non-jta-data-source>java:/TrabalhoDM110DS</non-jta-data-source>
 		<properties>
-			<property name="jboss.as.jpa.managed" value="false" />
-			<property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect" />
+			<property name="jboss.as.jpa.managed" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />
+			<property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />
+			<property name="hibernate.hbm2ddl.import_files" value="import.sql" />
 			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>
