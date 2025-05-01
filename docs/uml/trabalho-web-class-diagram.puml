@@ -20,6 +20,14 @@ class br.inatel.dm110.dto.CustomerDTO {
 }
 
 
+class br.inatel.dm110.impl.CustomerResource {
+	{method} +createCustomer ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : jakarta.ws.rs.core.Response
+	{method} +getCustomer ( paramString1 : String ) : jakarta.ws.rs.core.Response
+	{method} +listCustomers () : jakarta.ws.rs.core.Response
+	{method} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : jakarta.ws.rs.core.Response
+}
+
+
 interface br.inatel.dm110.interfaces.AuditBeanLocal {
 	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
 }
@@ -40,6 +48,7 @@ class br.inatel.dm110.rest.RestApplication {
 
 
 
+br.inatel.dm110.impl.CustomerResource -->  br.inatel.dm110.interfaces.CustomerBeanLocal : customerBean
 
 
 @enduml

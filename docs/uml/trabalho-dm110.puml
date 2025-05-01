@@ -115,12 +115,18 @@ br.inatel.dm110.beans.mdb.AuditQueueMDB -->  br.inatel.dm110.interfaces.AuditBea
 
 
 
-class br.inatel.dm110.rest.RestApplication {
-	{method} +getClasses () : java.util.Set
+class br.inatel.dm110.impl.CustomerResource {
+	{method} +createCustomer ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : jakarta.ws.rs.core.Response
+	{method} +getCustomer ( paramString1 : String ) : jakarta.ws.rs.core.Response
+	{method} +listCustomers () : jakarta.ws.rs.core.Response
+	{method} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : jakarta.ws.rs.core.Response
 }
 
 
 
+class br.inatel.dm110.rest.RestApplication {
+	{method} +getClasses () : java.util.Set
+}
 
 
 @enduml

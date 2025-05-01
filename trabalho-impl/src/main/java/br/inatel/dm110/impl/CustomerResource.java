@@ -1,4 +1,4 @@
-package br.inatel.impl;
+package br.inatel.dm110.impl;
 
 import java.util.List;
 
