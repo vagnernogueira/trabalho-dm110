@@ -25,6 +25,31 @@
 					<failOnMissingWebXml>false</failOnMissingWebXml>
 				</configuration>
 			</plugin>
+			<plugin>
+			<groupId>org.apache.maven.plugins</groupId>
+	        <artifactId>maven-resources-plugin</artifactId>
+			<executions>
+	          <execution>
+	            <id>copy-generated-doc-to-parent</id>
+	            <phase>package</phase>
+	            <goals>
+	              <goal>copy-resources</goal>
+	            </goals>
+	            <configuration>
+	              <outputDirectory>../docs/uml</outputDirectory>
+	              <resources>
+	                <resource>
+	                  <directory>${project.build.directory}/generated-docs</directory>
+	                  <includes>
+	                    <include>${project.artifactId}-class-diagram.puml</include>
+	                  </includes>
+	                </resource>
+	              </resources>
+	              <overwrite>true</overwrite>
+	            </configuration>
+            </execution>
+          </executions>		
+  		</plugin>
 		</plugins>
 	</build>
 
@@ -40,7 +65,6 @@
 			<type>jar</type>
 			<scope>provided</scope>
 		</dependency>
-
 		<dependency>
 			<groupId>jakarta.platform</groupId>
 			<artifactId>jakarta.jakartaee-api</artifactId>
@@ -53,6 +77,5 @@
 			<groupId>org.glassfish.web</groupId>
 			<artifactId>jakarta.servlet.jsp.jstl</artifactId>
 		</dependency>
-
 	</dependencies>
 </project>

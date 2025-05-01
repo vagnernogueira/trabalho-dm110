@@ -1,0 +1,40 @@
+@startuml
+
+class br.inatel.dm110.dto.AuditDTO {
+	{field} +operation : String
+	{field} +registerCode : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+class br.inatel.dm110.dto.CustomerDTO {
+	{field} +birthdate : java.time.LocalDate
+	{field} +cep : String
+	{field} +cpf : String
+	{field} +email : String
+	{field} +gender : String
+	{field} +name : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+interface br.inatel.dm110.interfaces.AuditBeanLocal {
+	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
+}
+
+
+interface br.inatel.dm110.interfaces.CustomerBeanLocal {
+	{method}  {abstract} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
+	{method}  {abstract} +findAll () : java.util.List
+	{method}  {abstract} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
+	{method}  {abstract} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
+}
+
+
+
+
+
+
+@enduml
