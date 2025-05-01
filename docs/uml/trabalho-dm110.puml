@@ -63,25 +63,6 @@ class br.inatel.dm110.beans.mdb.AuditSenderBean {
 }
 
 
-class br.inatel.dm110.dto.AuditDTO {
-	{field} +operation : String
-	{field} +registerCode : String
-	{field} {static} -serialVersionUID : long
-	{method} +toString () : String
-}
-
-
-class br.inatel.dm110.dto.CustomerDTO {
-	{field} +birthdate : java.time.LocalDate
-	{field} +cep : String
-	{field} +cpf : String
-	{field} +email : String
-	{field} +gender : String
-	{field} +name : String
-	{field} {static} -serialVersionUID : long
-	{method} +toString () : String
-}
-
 
 class br.inatel.dm110.entities.Audit {
 	{field} {static} +OPERATION_CREATE : String
@@ -108,18 +89,6 @@ class br.inatel.dm110.entities.Customer {
 }
 
 
-interface br.inatel.dm110.interfaces.AuditBeanLocal {
-	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
-}
-
-
-interface br.inatel.dm110.interfaces.CustomerBeanLocal {
-	{method}  {abstract} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
-	{method}  {abstract} +findAll () : java.util.List
-	{method}  {abstract} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
-	{method}  {abstract} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
-}
-
 
 class br.inatel.dm110.support.AuditConverter {
 	{method}  {static} +toEntity ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : br.inatel.dm110.entities.Audit
@@ -139,79 +108,11 @@ class br.inatel.dm110.support.LoggerProducer {
 }
 
 
-
-
 br.inatel.dm110.beans.AuditBean ..|>  br.inatel.dm110.interfaces.AuditBeanLocal
 br.inatel.dm110.beans.CustomerBean -->  br.inatel.dm110.beans.mdb.AuditSenderBean : auditSenderBean
 br.inatel.dm110.beans.CustomerBean ..|>  br.inatel.dm110.interfaces.CustomerBeanLocal
 br.inatel.dm110.beans.mdb.AuditQueueMDB -->  br.inatel.dm110.interfaces.AuditBeanLocal : auditBean
 
-
-class br.inatel.dm110.dto.AuditDTO {
-	{field} +operation : String
-	{field} +registerCode : String
-	{field} {static} -serialVersionUID : long
-	{method} +toString () : String
-}
-
-
-class br.inatel.dm110.dto.CustomerDTO {
-	{field} +birthdate : java.time.LocalDate
-	{field} +cep : String
-	{field} +cpf : String
-	{field} +email : String
-	{field} +gender : String
-	{field} +name : String
-	{field} {static} -serialVersionUID : long
-	{method} +toString () : String
-}
-
-
-interface br.inatel.dm110.interfaces.AuditBeanLocal {
-	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
-}
-
-
-interface br.inatel.dm110.interfaces.CustomerBeanLocal {
-	{method}  {abstract} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
-	{method}  {abstract} +findAll () : java.util.List
-	{method}  {abstract} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
-	{method}  {abstract} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
-}
-
-
-
-class br.inatel.dm110.dto.AuditDTO {
-	{field} +operation : String
-	{field} +registerCode : String
-	{field} {static} -serialVersionUID : long
-	{method} +toString () : String
-}
-
-
-class br.inatel.dm110.dto.CustomerDTO {
-	{field} +birthdate : java.time.LocalDate
-	{field} +cep : String
-	{field} +cpf : String
-	{field} +email : String
-	{field} +gender : String
-	{field} +name : String
-	{field} {static} -serialVersionUID : long
-	{method} +toString () : String
-}
-
-
-interface br.inatel.dm110.interfaces.AuditBeanLocal {
-	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
-}
-
-
-interface br.inatel.dm110.interfaces.CustomerBeanLocal {
-	{method}  {abstract} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
-	{method}  {abstract} +findAll () : java.util.List
-	{method}  {abstract} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
-	{method}  {abstract} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
-}
 
 
 class br.inatel.dm110.rest.RestApplication {
