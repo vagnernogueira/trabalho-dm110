@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.inatel.dm110.beans.mdb.AuditSenderBean;
 import br.inatel.dm110.dto.CustomerDTO;
+import br.inatel.dm110.entities.Audit;
 import br.inatel.dm110.entities.Customer;
 import br.inatel.dm110.interfaces.CustomerBeanLocal;
 import br.inatel.dm110.support.CustomerConverter;
@@ -26,6 +27,7 @@ public class CustomerBean implements CustomerBeanLocal
 		Customer customer = CustomerConverter.toEntity(customerDTO);
 		em.persist(customer);
 		auditSenderBean.sendTextMessage(customer.toString());
+		auditSenderBean.sendTextMessage(customer.getCpf() + "-" + Audit.OPERATION_CREATE);
 	}
 
 	public CustomerDTO findByCpf(String cpf)
@@ -50,7 +52,7 @@ public class CustomerBean implements CustomerBeanLocal
 			customer.setGender(dto.getGender());
 			customer.setEmail(dto.getEmail());
 			customer.setCep(dto.getCep());
-			auditSenderBean.sendTextMessage(customer.toString());
+			auditSenderBean.sendTextMessage(cpf + "-" + Audit.OPERATION_UPDATE);
 			return true;
 		}
 		return false;

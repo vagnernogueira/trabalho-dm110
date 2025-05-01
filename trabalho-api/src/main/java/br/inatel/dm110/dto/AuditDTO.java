@@ -18,4 +18,6 @@ public class AuditDTO implements Serializable
 	private static final long serialVersionUID = -3917596867383456479L;
 
 	private String registerCode;
+	
+	private String operation;
 }

@@ -7,6 +7,6 @@ public class AuditConverter
 {
 	public static Audit toEntity(AuditDTO dto)
 	{
-		return new Audit(dto.getRegisterCode(), Audit.OPERATION_CREATE);
+		return new Audit(dto.getRegisterCode(), dto.getOperation());
 	}
 }

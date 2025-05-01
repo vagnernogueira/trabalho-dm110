@@ -35,7 +35,12 @@ public class AuditQueueMDB implements MessageListener {
 				TextMessage txtMessage = (TextMessage) message;
 				String text = txtMessage.getText();
 				log.info("Received audit message from queue: " + text);
-				AuditDTO auditDTO = new AuditDTO(text);
+				
+				String[] parts = text.split("-");
+				String registerCode = parts[0];
+				String operation = parts[1];
+				
+				AuditDTO auditDTO = new AuditDTO(registerCode, operation);
 				auditBean.create(auditDTO);
 			}
 		} catch (JMSException e) {
