@@ -1,0 +1,225 @@
+@startuml
+
+class br.inatel.dm110.dto.AuditDTO {
+	{field} +operation : String
+	{field} +registerCode : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+class br.inatel.dm110.dto.CustomerDTO {
+	{field} +birthdate : java.time.LocalDate
+	{field} +cep : String
+	{field} +cpf : String
+	{field} +email : String
+	{field} +gender : String
+	{field} +name : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+interface br.inatel.dm110.interfaces.AuditBeanLocal {
+	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
+}
+
+
+interface br.inatel.dm110.interfaces.CustomerBeanLocal {
+	{method}  {abstract} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
+	{method}  {abstract} +findAll () : java.util.List
+	{method}  {abstract} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
+	{method}  {abstract} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
+}
+
+
+class br.inatel.dm110.beans.AuditBean {
+	{field} -em : jakarta.persistence.EntityManager
+	{field} ~log : java.util.logging.Logger
+	{method} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
+}
+
+
+class br.inatel.dm110.beans.CustomerBean {
+	{field} -em : jakarta.persistence.EntityManager
+	{method} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
+	{method} +findAll () : java.util.List
+	{method} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
+	{method} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
+}
+
+
+class br.inatel.dm110.beans.mdb.AuditQueueMDB {
+	{field} ~log : java.util.logging.Logger
+	{method} +onMessage ( paramMessage1 : jakarta.jms.Message ) : void
+}
+
+
+class br.inatel.dm110.beans.mdb.AuditSenderBean {
+	{field} -connectionFactory : jakarta.jms.ConnectionFactory
+	{field} ~log : java.util.logging.Logger
+	{field} -queue : jakarta.jms.Queue
+	{method} +sendTextMessage ( paramString1 : String ) : void
+}
+
+
+class br.inatel.dm110.dto.AuditDTO {
+	{field} +operation : String
+	{field} +registerCode : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+class br.inatel.dm110.dto.CustomerDTO {
+	{field} +birthdate : java.time.LocalDate
+	{field} +cep : String
+	{field} +cpf : String
+	{field} +email : String
+	{field} +gender : String
+	{field} +name : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+class br.inatel.dm110.entities.Audit {
+	{field} {static} +OPERATION_CREATE : String
+	{field} {static} +OPERATION_UPDATE : String
+	{field} +identifier : Integer
+	{field} +operation : String
+	{field} +registerCode : String
+	{field} +timestamp : java.util.Date
+	{method} #onCreate () : void
+}
+
+
+class br.inatel.dm110.entities.Customer {
+	{field} +birthdate : java.time.LocalDate
+	{field} +cep : String
+	{field} +cpf : String
+	{field} +email : String
+	{field} +gender : String
+	{field} +name : String
+	{method} #canEqual ( paramObject1 : Object ) : boolean
+	{method} +equals ( paramObject1 : Object ) : boolean
+	{method} +hashCode () : int
+	{method} +toString () : String
+}
+
+
+interface br.inatel.dm110.interfaces.AuditBeanLocal {
+	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
+}
+
+
+interface br.inatel.dm110.interfaces.CustomerBeanLocal {
+	{method}  {abstract} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
+	{method}  {abstract} +findAll () : java.util.List
+	{method}  {abstract} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
+	{method}  {abstract} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
+}
+
+
+class br.inatel.dm110.support.AuditConverter {
+	{method}  {static} +toEntity ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : br.inatel.dm110.entities.Audit
+}
+
+
+class br.inatel.dm110.support.CustomerConverter {
+	{method}  {static} +toDTO ( paramCustomer1 : br.inatel.dm110.entities.Customer ) : br.inatel.dm110.dto.CustomerDTO
+	{method}  {static} +toDTOList ( paramList1 : java.util.List ) : java.util.List
+	{method}  {static} +toEntity ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : br.inatel.dm110.entities.Customer
+	{method}  {static} +toEntityList ( paramList1 : java.util.List ) : java.util.List
+}
+
+
+class br.inatel.dm110.support.LoggerProducer {
+	{method} +getLogger ( paramInjectionPoint1 : jakarta.enterprise.inject.spi.InjectionPoint ) : java.util.logging.Logger
+}
+
+
+
+
+br.inatel.dm110.beans.AuditBean ..|>  br.inatel.dm110.interfaces.AuditBeanLocal
+br.inatel.dm110.beans.CustomerBean -->  br.inatel.dm110.beans.mdb.AuditSenderBean : auditSenderBean
+br.inatel.dm110.beans.CustomerBean ..|>  br.inatel.dm110.interfaces.CustomerBeanLocal
+br.inatel.dm110.beans.mdb.AuditQueueMDB -->  br.inatel.dm110.interfaces.AuditBeanLocal : auditBean
+
+
+class br.inatel.dm110.dto.AuditDTO {
+	{field} +operation : String
+	{field} +registerCode : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+class br.inatel.dm110.dto.CustomerDTO {
+	{field} +birthdate : java.time.LocalDate
+	{field} +cep : String
+	{field} +cpf : String
+	{field} +email : String
+	{field} +gender : String
+	{field} +name : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+interface br.inatel.dm110.interfaces.AuditBeanLocal {
+	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
+}
+
+
+interface br.inatel.dm110.interfaces.CustomerBeanLocal {
+	{method}  {abstract} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
+	{method}  {abstract} +findAll () : java.util.List
+	{method}  {abstract} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
+	{method}  {abstract} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
+}
+
+
+
+class br.inatel.dm110.dto.AuditDTO {
+	{field} +operation : String
+	{field} +registerCode : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+class br.inatel.dm110.dto.CustomerDTO {
+	{field} +birthdate : java.time.LocalDate
+	{field} +cep : String
+	{field} +cpf : String
+	{field} +email : String
+	{field} +gender : String
+	{field} +name : String
+	{field} {static} -serialVersionUID : long
+	{method} +toString () : String
+}
+
+
+interface br.inatel.dm110.interfaces.AuditBeanLocal {
+	{method}  {abstract} +create ( paramAuditDTO1 : br.inatel.dm110.dto.AuditDTO ) : void
+}
+
+
+interface br.inatel.dm110.interfaces.CustomerBeanLocal {
+	{method}  {abstract} +create ( paramCustomerDTO1 : br.inatel.dm110.dto.CustomerDTO ) : void
+	{method}  {abstract} +findAll () : java.util.List
+	{method}  {abstract} +findByCpf ( paramString1 : String ) : br.inatel.dm110.dto.CustomerDTO
+	{method}  {abstract} +updateCustomer ( paramString1 : String , paramCustomerDTO2 : br.inatel.dm110.dto.CustomerDTO ) : boolean
+}
+
+
+class br.inatel.dm110.rest.RestApplication {
+	{method} +getClasses () : java.util.Set
+}
+
+
+
+
+
+@enduml
