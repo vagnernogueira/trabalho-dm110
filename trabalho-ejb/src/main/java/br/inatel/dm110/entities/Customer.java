@@ -34,7 +34,7 @@ public class Customer
 	private LocalDate birthdate;
 
 	@Column(length = 1, nullable = false)
-	private String gender; // 'M' ou 'F'
+	private String gender; // 'M' or 'F'
 
 	@Column(length = 100, nullable = false, unique = true)
 	private String email;
