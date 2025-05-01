@@ -2,10 +2,12 @@ package br.inatel.dm110.beans;
 
 import java.util.List;
 
+import br.inatel.dm110.beans.mdb.AuditSenderBean;
 import br.inatel.dm110.dto.CustomerDTO;
 import br.inatel.dm110.entities.Customer;
 import br.inatel.dm110.interfaces.CustomerBeanLocal;
 import br.inatel.dm110.support.CustomerConverter;
+import jakarta.ejb.EJB;
 import jakarta.ejb.Stateless;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
@@ -15,11 +17,15 @@ public class CustomerBean implements CustomerBeanLocal
 {
 	@PersistenceContext(unitName = "trabalho_dm110_pu")
 	private EntityManager em;
+	
+	@EJB
+	AuditSenderBean auditSenderBean;
 
 	public void create(CustomerDTO customerDTO)
 	{
 		Customer customer = CustomerConverter.toEntity(customerDTO);
 		em.persist(customer);
+		auditSenderBean.sendTextMessage(customer.toString());
 	}
 
 	public CustomerDTO findByCpf(String cpf)
@@ -44,6 +50,7 @@ public class CustomerBean implements CustomerBeanLocal
 			customer.setGender(dto.getGender());
 			customer.setEmail(dto.getEmail());
 			customer.setCep(dto.getCep());
+			auditSenderBean.sendTextMessage(customer.toString());
 			return true;
 		}
 		return false;
