@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "6085beaa-054d-4f44-b15d-376eb4e2421f",
+		"name": "Trabalho-DM110",
+		"description": "Coleção de requests utilizados para testes relacionados ao trabalho da disciplina DM110 - Desenvolvimento JEE, prof. Roberto Rocha.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "44606198"
+	},
+	"item": [
+		{
+			"name": "create Fred Mercury",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cpf\": \"75116234188\",\r\n  \"name\": \"Fred Mercury\",\r\n  \"birthdate\": \"1960-06-15\",\r\n  \"gender\": \"M\",\r\n  \"email\": \"fred@queen.com\",\r\n  \"cep\": \"66060000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/trabalho-web/api/customers/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trabalho-web",
+						"api",
+						"customers",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create Janis Joplin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cpf\": \"11122233344\",\r\n  \"name\": \"Janis Joplin\",\r\n  \"birthdate\": \"1970-06-15\",\r\n  \"gender\": \"F\",\r\n  \"email\": \"janisjoplin@solo.com\",\r\n  \"cep\": \"03003000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/trabalho-web/api/customers/create",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trabalho-web",
+						"api",
+						"customers",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "list",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/trabalho-web/api/customers/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trabalho-web",
+						"api",
+						"customers",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Fred Mercury",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cpf\": \"75116234188\",\r\n  \"name\": \"Fred Mercury\",\r\n  \"birthdate\": \"1960-06-15\",\r\n  \"gender\": \"M\",\r\n  \"email\": \"fred@queen.com\",\r\n  \"cep\": \"66823000\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/trabalho-web/api/customers/update/75116234188",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trabalho-web",
+						"api",
+						"customers",
+						"update",
+						"75116234188"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update Janis Joplin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"cpf\": \"11122233344\",\r\n  \"name\": \"Janis Joplin\",\r\n  \"birthdate\": \"1970-06-15\",\r\n  \"gender\": \"F\",\r\n  \"email\": \"janisjoplin@solo.com\",\r\n  \"cep\": \"66820020\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/trabalho-web/api/customers/update/11122233344",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trabalho-web",
+						"api",
+						"customers",
+						"update",
+						"11122233344"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
