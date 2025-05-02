@@ -138,7 +138,7 @@ ear_file_path=$project_dir/trabalho-ear/target/trabalho-ear-1.0.ear
 
 ---
 ### 5 - Postman collection (TODO)
-- File: `[TrabalhoDM110.postman_collection.json](docs/script.sql)`
+- File: `[trabalho-dm110_postman_collection.json](docs/trabalho-dm110_postman_collection.json)`
 
 ---
 ### 6 - Undeploy
