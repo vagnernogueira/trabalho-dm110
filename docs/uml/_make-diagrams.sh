@@ -16,12 +16,7 @@ fi
 find "$SOURCE_DIR" -maxdepth 1 -type f -name "*.puml" -print0 | while IFS= read -r -d $'\0' puml_file; do
   if [ -f "$puml_file" ]; then
     echo "Process file: '$puml_file'"
-    # Por padrão, o PlantUML gera um arquivo PNG no mesmo diretório do arquivo .puml.
-    # Flags adicionais podem ser usadas:
-    # -tsvg : para gerar SVG em vez de PNG
-    # -o /caminho/destino : para especificar um diretório de saída diferente
-    plantuml "$puml_file"
-
+    plantuml -tsvg "$puml_file"
     if [ $? -eq 0 ]; then
       echo "  -> Image generated successfully."
     else

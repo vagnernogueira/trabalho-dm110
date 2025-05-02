@@ -34,7 +34,8 @@ O MDB obrigatoriamente deve chamar um Session Bean para acessar o banco de dados
 ---
 ## Class diagram
 
-<img style="margin-right: 30px" src="docs/uml/trabalho-dm110.png" width="1200px;" alt="Avatar"/><br>
+
+<img style="margin-right: 30px" src="docs/uml/trabalho-dm110.svg" width="1200px;" alt="Avatar"/><br>
 
 ---
 ## Technology stack
