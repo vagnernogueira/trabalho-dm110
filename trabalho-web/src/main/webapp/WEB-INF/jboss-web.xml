@@ -1,0 +1,3 @@
+<jboss-web>
+  <context-root>trabalho-web</context-root>
+</jboss-web>
