@@ -143,7 +143,7 @@ ear_file_path=$project_dir/trabalho-ear/target/trabalho-ear-1.0.ear
 ### 5 - Postman collection
 
 - File: [docs/Trabalho-DM110.postman_collection](https://raw.githubusercontent.com/vagnernogueira/trabalho-dm110/refs/heads/master/docs/Trabalho-DM110.postman_collection.json)
-
+- URL: [Trabalho-DM110](https://documenter.getpostman.com/view/44606198/2sB2j4fBAX)
 
 ---
 ### 6 - Undeploy

@@ -101,6 +101,56 @@
 			"response": []
 		},
 		{
+			"name": "cpf Fred Mercury",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/trabalho-web/api/customers/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trabalho-web",
+						"api",
+						"customers",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "cpf Janis Joplin",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/trabalho-web/api/customers/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"trabalho-web",
+						"api",
+						"customers",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "update Fred Mercury",
 			"request": {
 				"auth": {
