@@ -1,11 +1,40 @@
-# Trabalho DM110
-<br>
+# [INATEL – Pós-graduação](https://inatel.br/) – [Desenvolvimento Mobile e Cloud Computing](https://inatel.br/pos/desenvolvimento-mobile-e-cloud-computing)
+## Disciplina DM110 - Desenvolvimento Java EE
+## Prof. Roberto Ribeiro Rocha
+### Alunos [José Rodrigues](https://github.com/joseefrodriguesbr), [Taíbe Cruz](https://github.com/tandreycruz) e [Vagner Nogueira](https://github.com/vagnernogueira)
+### Trabalho Final<br>
+
 
 ---
-## [INATEL – Pós-graduação](https://inatel.br/) - [Desenvolvimento Mobile e Cloud Computing](https://inatel.br/pos/desenvolvimento-mobile-e-cloud-computing)
-## Disciplina DM110 - Prof. Roberto Ribeiro Rocha
-#### Alunos [José Rodrigues](https://github.com/joseefrodriguesbr), [Taíbe Cruz](https://github.com/tandreycruz) e [Vagner Nogueira](https://github.com/vagnernogueira)
-#### Trabalho Final<br>
+## Atividade proposta
+[Tema 02 – Customer](https://docs.google.com/spreadsheets/d/1CC6jFGP3k89uZhc6hHTPNyscnzZDAcXrgJXq-6i50ko)
+
+
+Serviços REST, Session Bean Stateless e Entities JPA para suportar as seguintes operações:
+
+- inclusão de um registro
+- busca de um registro através de seu identificador (ver sua entidade escolhida)
+- listagem de registros
+- atualização de um registro
+
+Os serviços REST obrigatoriamente devem chamar o Session Bean para acessar o banco de dados.
+
+
+O Session Bean deve chamar obrigatoriamente o serviço de mensagem (especificado abaixo) para ele efetuar o registro de auditoria.
+
+
+O serviço de mensagem (MDB) deve efetuar um registro de auditoria:
+
+- registrar todas as operações de alteração de dados realizadas e seus respectivos identificadores.
+
+
+O MDB obrigatoriamente deve chamar um Session Bean para acessar o banco de dados.
+
+
+---
+## Class diagram
+
+<img style="margin-right: 30px" src="docs/uml/trabalho-dm110.png" width="1200px;" alt="Avatar"/><br>
 
 ---
 ## Technology stack
@@ -39,61 +68,51 @@ mvn clean install
 
 ```bash
 
-project_dir=`pwd` && jdbc_driver_jar_path=$project_dir/docs/hsqldb-2.5.2.jar
+project_dir=`pwd`
+
+jdbc_driver_jar_path=$project_dir/docs/hsqldb-2.5.2.jar
 
 java -jar $jdbc_driver_jar_path
 
+
 ```
 
-*(TODO)*
+Setting Name: customer-database
+
+Type: HSQL Database Engine Standalone.
+
+Driver: org.hsqldb.jdbc.JDBCDriver.
+
+URL: jdbc:hsqldb:file:$project_dir/db/customer-database.db
+
+User: dm110
+
+Password: senhadm110
 
 
-  - Setting Name: DM110.
-  - Type: HSQL Database Engine Standalone.
-  - Driver: org.hsqldb.jdbc.JDBCDriver.
-  - URL: `jdbc:hsqldb:file:$caminho_completo_do_arquivo_do_banco` (por exemplo:jdbc:hsqldb:file:/home/aluno/dm110-database/dm110.db).
-  - User: SA
-  - Password: sa
-  
-- Criar a tabela PURCHASE_ENTITY com o seguinte comando:
+Copy contents of $project_dir/docs/script.sql
 
-  ```sql
-  CREATE TABLE PURCHASE_ENTITY (
-    INVOICE_CODE VARCHAR(255) PRIMARY KEY,
-    ORDER_ITEM VARCHAR(255),
-    CPF VARCHAR(14),
-    DATE_TIME TIMESTAMP,
-    VALUE DOUBLE
-  );
-  ```
-- Clique em `Execute SQL`, com isso a tabela PURCHASE_ENTITY será criada.
+Paste on text box interface and press Execute SQL.
 
-- Agora crie a tabela de auditoria:
-  ```sql
-  CREATE TABLE AUDIT_ENTITY (
-    ID BIGINT IDENTITY PRIMARY KEY,
-    REGISTER_CODE VARCHAR(255),
-    OPERATION VARCHAR(255),
-    CREATION_DATE TIMESTAMP
-  );
-  ```
 
 
 ```bash
 
-# Start wildfly
+url_jdbc=jdbc:hsqldb:file:$project_dir/db/customer-database.db
+
 cd $JBOSS_HOME/bin
+
+# Start wildfly
 ./standalone.sh -c=standalone-full.xml
 
 # Module
-cd $JBOSS_HOME/bin
 ./jboss-cli.sh --connect --command="module add --name=br.inatel.dm110.org.hsqldb --dependencies=javax.transaction.api --export-dependencies=javax.api --resources=$jdbc_driver_jar_path"
 
 # Driver
 ./jboss-cli.sh --connect --command="/subsystem=datasources/jdbcdriver=HSQLDBDriver:add(driver-name=HSQLDBDriver,driver-modulename=br.inatel.dm110.org.hsqldb,driver-class-name=org.hsqldb.jdbc.JDBCDriver)"
 
 # Datasource
-./jboss-cli.sh --connect --command="data-source add --jndi-name=java:/TrabalhoDM110DS --name=TrabalhoDM110DS --connection-url=jdbc:hsqldb:file:$db_path --driver-name=HSQLDBDriver --password=sa –user-name=SA"
+./jboss-cli.sh --connect --command="data-source add --jndi-name=java:/TrabalhoDM110DS --name=TrabalhoDM110DS --connection-url=$url_jdbc --driver-name=HSQLDBDriver --password=senhadm110 –user-name=dm110"
 
 ```
 
@@ -102,7 +121,6 @@ cd $JBOSS_HOME/bin
 
 ```bash
 
-# Command to create Queue
 ./jboss-cli.sh --connect --command="jms-queue add --queue-address=dm110queue --durable=true --entries=[java:/jms/queue/dm110queue]"
 
 ```
@@ -119,21 +137,16 @@ ear_file_path=$project_dir/trabalho-ear/target/trabalho-ear-1.0.ear
 ```
 
 ---
-#### 4.1 - Postman collection (TODO)
+### 5 - Postman collection (TODO)
 - File: `[TrabalhoDM110.postman_collection.json](docs/script.sql)`
 
 ---
-### 4 - Undeploy
+### 6 - Undeploy
 
 ```bash
 
 ./jboss-cli.sh --connect --command="undeploy trabalho-ear-1.0.ear"
 
 ```
-
----
-## Class diagram
-
-<img style="margin-right: 30px" src="docs/uml/trabalho-dm110.png" width="1200px;" alt="Avatar"/><br>
 
 ---
