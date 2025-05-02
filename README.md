@@ -34,7 +34,10 @@ O MDB obrigatoriamente deve chamar um Session Bean para acessar o banco de dados
 ---
 ## Class diagram
 
-<img style="margin-right: 30px" src="docs/uml/trabalho-dm110.png" width="1200px;" alt="Avatar"/><br>
+
+<img style="margin-right: 30px" src="docs/uml/trabalho-dm110.svg" width="1200px;" alt="Avatar"/><br>
+
+[Click here to best visualization](https://raw.githubusercontent.com/vagnernogueira/trabalho-dm110/refs/heads/master/docs/uml/trabalho-dm110.svg)
 
 ---
 ## Technology stack
@@ -138,8 +141,9 @@ ear_file_path=$project_dir/trabalho-ear/target/trabalho-ear-1.0.ear
 
 ---
 ### 5 - Postman collection
-- File: [Trabalho-DM110.postman_collection.json](docs/Trabalho-DM110.postman_collection.json)
-- URL: [Trabalho-DM110](https://documenter.getpostman.com/view/44606198/2sB2j4fBAX)
+
+- File: [docs/Trabalho-DM110.postman_collection](https://raw.githubusercontent.com/vagnernogueira/trabalho-dm110/refs/heads/master/docs/Trabalho-DM110.postman_collection.json)
+
 
 ---
 ### 6 - Undeploy
